@@ -311,8 +311,10 @@ view: jobs_base {
     type: string
     map_layer_name: countries
     sql:  CASE
-            WHEN ${TABLE}.error_result is null
+            WHEN EXTRACT(HOUR FROM ${TABLE}.start_time ) =17
             THEN "CN"
+            WHEN EXTRACT(HOUR FROM ${TABLE}.start_time ) =11
+            THEN "UK"
             ELSE "US"
           END ;;
   }
