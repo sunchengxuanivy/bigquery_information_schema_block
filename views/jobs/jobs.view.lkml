@@ -210,6 +210,10 @@ view: jobs_base {
     sql:ARRAY_TO_STRING(ARRAY(select distinct(dataset_id) from unnest(${TABLE}.referenced_tables) order by dataset_id),",\n") ;;
 
   }
+
+  dimension: related_security_code {
+    sql: ARRAY_TO_STRING(ARRAY(select DISTINCT(TRIM(REGEXP_REPLACE(raw ,'(?i) securitycode[ ]*=',''))) AS securityCode from unnest(REGEXP_EXTRACT_ALL(${TABLE}.query, '(?i) securitycode[ ]*=[ ]*[0-9]+ '))as raw ),",")  ;;
+  }
   dimension: referenced_tables {
     hidden: yes # Messy nested/record
     type: string
