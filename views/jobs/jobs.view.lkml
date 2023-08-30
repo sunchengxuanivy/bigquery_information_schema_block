@@ -207,7 +207,7 @@ view: jobs_base {
   }
   dimension: referenced_tables_string {
     # hidden: yes
-    sql:ARRAY_TO_STRING(ARRAY(select distinct(dataset_id) from unnest(${TABLE}.referenced_tables) order by dataset_id),",") ;;
+    sql:ARRAY_TO_STRING(ARRAY(select distinct(dataset_id) from unnest(${TABLE}.referenced_tables) order by dataset_id),",\n") ;;
 
   }
   dimension: referenced_tables {
