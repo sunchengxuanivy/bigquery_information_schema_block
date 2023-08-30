@@ -314,7 +314,7 @@ view: jobs_base {
             WHEN EXTRACT(HOUR FROM ${TABLE}.start_time ) =17
             THEN "CN"
             WHEN EXTRACT(HOUR FROM ${TABLE}.start_time ) =11
-            THEN "UK"
+            THEN "GB"
             ELSE "US"
           END ;;
   }
