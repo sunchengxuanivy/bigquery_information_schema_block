@@ -307,7 +307,7 @@ view: jobs_base {
     type: string
     map_layer_name: countries
     sql:  CASE
-            WHEN ${processed_bytes} = 0
+            WHEN ${error_result} is null
             THEN "CN"
             ELSE "US"
           END ;;
