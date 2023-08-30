@@ -307,12 +307,9 @@ view: jobs_base {
     type: string
     map_layer_name: countries
     sql:  CASE
-            WHEN ${statement_type} = 'CREATE_MODEL'
+            WHEN ${processed_bytes} = 0
             THEN "CN"
-            WHEN ${statement_type} IN ('DELETE','SELECT','CREATE_TABLE_AS_SELECT','INSERT','MERGE')
-            THEN  "US"
-            WHEN ${statement_type} IS NULL
-            THEN "CN"
+            ELSE "US"
           END ;;
   }
 
