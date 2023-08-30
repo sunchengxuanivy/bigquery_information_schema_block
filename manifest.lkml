@@ -2,13 +2,13 @@
 
 constant: CONNECTION {
   # Enter the name of the Looker connection to use
-  value: "looker_app_2"
+  value: "information_schema"
   export: override_optional
 }
 
 constant: REGION {
   # E.g. us
-  value: "us"
+  value: "asia-east2"
   export: override_optional
 }
 constant: SCOPE {
@@ -19,12 +19,12 @@ constant: SCOPE {
 }
 constant: BILLING_PROJECT_ID {
   # This is used to reference Capacity Commitment data (for flat-rate billing) to compare slot usage against
-  value: " "
+  value: "sunivy-for-example"
   export: override_optional
 }
 constant: RESERVATION_ADMIN_PROJECT  {
   # IF Different than Billing Project ID, used when querying RESERVATIONS_BY_<SCOPE> Data
-  value: " "
+  value: "sunivy-for-example"
   export: override_optional
 }
 

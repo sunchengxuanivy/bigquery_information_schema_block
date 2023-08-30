@@ -205,6 +205,11 @@ view: jobs_base {
     sql: ${TABLE}.referenced_tables ;;
 
   }
+  dimension: referenced_tables_string {
+    # hidden: yes
+    sql:ARRAY_TO_STRING(ARRAY(select distinct(dataset_id) from unnest(${TABLE}.referenced_tables) order by dataset_id),",") ;;
+
+  }
   dimension: referenced_tables {
     hidden: yes # Messy nested/record
     type: string
@@ -259,6 +264,7 @@ view: jobs_base {
 
   dimension_group: start_time {
     group_label: "Start Time"
+    allow_fill: yes
     description: "The start time of the job. May be after the creation time due to queueing if the query was in state PENDING"
     type: time
     timeframes: [
@@ -295,6 +301,19 @@ view: jobs_base {
       hour_of_day
     ]
     sql: ${TABLE}.end_time ;;
+  }
+
+  dimension: region {
+    type: string
+    map_layer_name: countries
+    sql:  CASE
+            WHEN ${statement_type} = 'CREATE_MODEL'
+            THEN "CN"
+            WHEN ${statement_type} IN ('DELETE','SELECT','CREATE_TABLE_AS_SELECT','INSERT','MERGE')
+            THEN  "US"
+            WHEN ${statement_type} IS NULL
+            THEN "CN"
+          END ;;
   }
 
 
