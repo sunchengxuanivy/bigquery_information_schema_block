@@ -205,7 +205,12 @@ view: jobs_base {
   }
   dimension: referenced_tables_string {
     # hidden: yes
-    sql:ARRAY_TO_STRING(ARRAY(select distinct(dataset_id) from unnest(${TABLE}.referenced_tables) order by dataset_id),",\n") ;;
+    sql:ARRAY_TO_STRING(ARRAY(select distinct(
+          CASE WHEN dataset_id = 'HKEx_demo_securities_market' THEN 'Historical Full Book'
+              WHEN dataset_id = 'HKEx_demo_securities_attribute' THEN 'Securities Attribute'
+          ELSE dataset_id
+          END
+    ) datasets from unnest(${TABLE}.referenced_tables) order by datasets),",\n") ;;
 
   }
 

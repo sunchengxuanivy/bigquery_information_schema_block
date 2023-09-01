@@ -35,6 +35,16 @@ view: tables {
     sql: ${TABLE}.table_schema ;;
   }
 
+  dimension: dataset_id_mapped {
+    type: string
+    group_label: "[Identifiers]"
+    label: " Dataset_mapped"
+    sql: CASE WHEN ${table_schema} = 'HKEx_demo_securities_market' THEN 'Historical Full Book'
+              WHEN ${table_schema} = 'HKEx_demo_securities_attribute' THEN 'Securities Attribute'
+          ELSE ${table_schema}
+          END;;
+  }
+
   dimension: table_name {
     group_label: "[Identifiers]"
     label: "Name"

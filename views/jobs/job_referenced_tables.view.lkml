@@ -25,6 +25,7 @@ view: job_referenced_tables {
     sql: ${TABLE}.dataset_id ;;
   }
 
+
   dimension: table_id {
     type: string
     full_suggestions: yes
