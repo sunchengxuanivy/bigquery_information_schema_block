@@ -1,4 +1,5 @@
 include: "/views/jobs/jobs.view.lkml"
+include: "/views/sector.view.lkml"
 
 # Nested fields
 include: "/views/jobs/job_referenced_tables.view.lkml"
@@ -154,6 +155,13 @@ explore: jobs_base {
     type: left_outer
     sql: LEFT JOIN UNNEST(job_stages.steps) AS job_stage_steps WITH OFFSET job_stage_steps_offset ;;
     required_joins: [job_stages]
+  }
+
+  join: sector {
+    view_label: "Sector"
+    relationship: one_to_one
+    type: left_outer
+    sql_on: ${sector.Stock_Code}=${jobs.related_security_code};;
   }
 
 #   join: job_stage_step_substeps {
